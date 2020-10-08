@@ -25,33 +25,33 @@ public class BestGymEver {
             }
         }
         catch (Exception e){
-            System.out.println("Error");
+            e.printStackTrace();
             System.exit(0);
         }
         return fullList;
     }
 
-    public void checkMembership(List<String> fullList, String input){
+    public String checkMembership(List<String> fullList, String input){
         for (String s: fullList) {
             if(s.contains(input)){
                 //placeInList beräknar ut vilken rad kunden står på
                 int placeInList = fullList.indexOf(s)+1;
+
                 //dateofMembership gör om String datumet till en LocalDate
                 LocalDate dateOfMembership = LocalDate.parse(fullList.get(placeInList));
+
                 //counter jämför om dateOfMembership + 365 dagar är innan, efter eller idag och skriver ut status på medlemskapet
                 int counter = dateOfMembership.plusDays(365).compareTo(LocalDate.now());
 
                 if (counter < 0)
-                    System.out.println("Kunden har ett gammalt medlemskap");
+                    return "Kunden har ett oaktivt medlemskap";
                 else if (counter > 0)
-                    System.out.println("Kunden är medlem");
+                    return "Kunden är aktivt medlem";
                 else
-                    System.out.println("Medlemskapet går ut idag");
-
-                System.exit(0);
+                    return "Medlemskapet går ut idag";
             }
         }
-        System.out.println("Inget medlemskap hittades");
+        return "Inget medlemskap hittades";
     }
 
     public String getInput(){
@@ -70,8 +70,8 @@ public class BestGymEver {
     }
 
     public BestGymEver(){
-        List<String> fullList = getListFromFile(members);
-        checkMembership(fullList, getInput());
+//        List<String> fullList = getListFromFile(members);
+//        System.out.println(checkMembership(fullList, getInput()));
     }
 
     public static void main(String[] args) {
@@ -80,14 +80,6 @@ public class BestGymEver {
 }
 
 /*
-        Ta input, namn eller personnummer
-        läs i filen om personen finns.
-            finns? När betalades årsavgiften.
-                inom ett år - MEDLEM
-                för över ett år sen - FÖREDETTA MEDLEM
-            finns inte? - INTE MEDLEM
-
-
             Om MEDLEM
             skriv ner när kund besökt gymmet i en egen fil.
 
