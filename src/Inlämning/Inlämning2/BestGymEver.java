@@ -73,7 +73,7 @@ public class BestGymEver {
     }
 
     public List<String> getRecord(){
-        List<String> trackRecord = getListFromFile(members);
+        List<String> trackRecord = getListFromFile("record.txt");
         return trackRecord;
     }
 
@@ -105,8 +105,8 @@ public class BestGymEver {
 
     public BestGymEver(){
         List<String> fullList = getListFromFile(members);
-//       System.out.println(checkMembership(fullList, getInput(null)));
-//       printRecord();
+       System.out.println(checkMembership(fullList, getInput(null)));
+       printRecord(getRecord());
     }
 
     public static void main(String[] args) {
