@@ -1,7 +1,6 @@
 package Inlämning.Inlämning2;
 
 import java.io.File;
-import java.nio.file.LinkOption;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,50 +31,51 @@ public class BestGymEver {
         return fullList;
     }
 
-    public void printMember(List<String> fullList, String input){
+    public void checkMembership(List<String> fullList, String input){
         for (String s: fullList) {
             if(s.contains(input)){
-                System.out.println("MEDLEM");
+                //placeInList beräknar ut vilken rad kunden står på
                 int placeInList = fullList.indexOf(s)+1;
-                System.out.println("Finns på rad: " + placeInList);
-                System.out.println("Medlem sedan: " + fullList.get(placeInList));
-                System.out.println(LocalDate.parse(fullList.get(placeInList)));
-                LocalDate gammal = LocalDate.parse(fullList.get(placeInList));
+                //dateofMembership gör om String datumet till en LocalDate
+                LocalDate dateOfMembership = LocalDate.parse(fullList.get(placeInList));
+                //counter jämför om dateOfMembership + 365 dagar är innan, efter eller idag och skriver ut status på medlemskapet
+                int counter = dateOfMembership.plusDays(365).compareTo(LocalDate.now());
 
-                System.out.println(gammal.plusDays(365));
-                int counter = gammal.plusDays(365).compareTo(LocalDate.now());
                 if (counter < 0)
-                    System.out.println("GAMMALT MEDLEMSKAP");
+                    System.out.println("Kunden har ett gammalt medlemskap");
                 else if (counter > 0)
-                    System.out.println("MEDLEM");
+                    System.out.println("Kunden är medlem");
                 else
                     System.out.println("Medlemskapet går ut idag");
+
+                System.exit(0);
             }
         }
+        System.out.println("Inget medlemskap hittades");
     }
 
     public String getInput(){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Skriv in en medlems namn eller personnummer");
-        String input = null;
+        System.out.println("Skriv in ett namn eller personnummer");
 
-        while (sc.hasNextLine()){
-            input = sc.nextLine();
-            if(input.equals("KLAR"))
-                break;
+        while (true){
+            String input = sc.nextLine();
 
+            if(input.isBlank()){
+                System.out.println("Du har inte angett något namn eller personnummer");
+                continue;
+            }
             return input;
         }
-        return input;
     }
 
     public BestGymEver(){
         List<String> fullList = getListFromFile(members);
-        printMember(fullList, getInput());
+        checkMembership(fullList, getInput());
     }
 
     public static void main(String[] args) {
-        BestGymEver bge = new BestGymEver();
+        BestGymEver start = new BestGymEver();
     }
 }
 
