@@ -1,6 +1,6 @@
 package Inlämning.Inlämning2;
 
-import java.io.File;
+import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +39,9 @@ public class BestGymEver {
                 //placeInList beräknar ut vilken rad kunden står på
                 int placeInList = fullList.indexOf(s)+1;
 
+                //String som innehåller all kundens information, personnummer + namn
+                String fullMembersInfo = fullList.get(fullList.indexOf(s));
+
                 //dateofMembership gör om String datumet till en LocalDate
                 LocalDate dateOfMembership = LocalDate.parse(fullList.get(placeInList));
 
@@ -47,13 +50,26 @@ public class BestGymEver {
 
                 if (counter < 0)
                     return "Kunden har ett oaktivt medlemskap";
-                else if (counter > 0)
+                else if (counter > 0){
+                    setRecord(fullMembersInfo);
                     return "Kunden är aktivt medlem";
+                }
                 else
                     return "Medlemskapet går ut idag";
             }
         }
         return "Inget medlemskap hittades";
+    }
+
+    public void setRecord(String member) {
+        try{
+            PrintWriter ut = new PrintWriter(new BufferedWriter(new FileWriter("record.txt", true)));
+            ut.println(member);
+            ut.println(LocalDate.now());
+            ut.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     public String getInput(String inputForTesting){
@@ -64,7 +80,6 @@ public class BestGymEver {
             sc = new Scanner(System.in);
             System.out.println("Skriv in ett namn eller personnummer");
         }
-
 
         while (true){
             String input = sc.nextLine();
@@ -79,16 +94,10 @@ public class BestGymEver {
 
     public BestGymEver(){
         List<String> fullList = getListFromFile(members);
-       // System.out.println(checkMembership(fullList, getInput(null)));
+       System.out.println(checkMembership(fullList, getInput(null)));
     }
 
     public static void main(String[] args) {
         BestGymEver start = new BestGymEver();
     }
 }
-
-/*
-            Om MEDLEM
-            skriv ner när kund besökt gymmet i en egen fil.
-
- */
