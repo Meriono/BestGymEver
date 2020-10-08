@@ -38,4 +38,13 @@ class BestGymEverTest {
         assertFalse(bge.getInput(ok).isBlank());
         assertTrue(bge.getInput(ok).equals("Hanna"));
     }
+
+    @Test
+    void recordTest(){
+        fullList.add("Adam");
+        fullList.add("Bertil");
+        fullList.add("Cesar");
+        bge.setRecord(fullList.get(1));
+        bge.printRecord();
+    }
 }

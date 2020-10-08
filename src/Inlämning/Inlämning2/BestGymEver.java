@@ -72,6 +72,14 @@ public class BestGymEver {
         }
     }
 
+    public void printRecord(){
+        List<String> trackRecord = getListFromFile("record.txt");
+        for (String s: trackRecord) {
+            System.out.println(s);
+        }
+
+    }
+
     public String getInput(String inputForTesting){
         if(test){
             sc = new Scanner(inputForTesting);
@@ -94,7 +102,8 @@ public class BestGymEver {
 
     public BestGymEver(){
         List<String> fullList = getListFromFile(members);
-       System.out.println(checkMembership(fullList, getInput(null)));
+//       System.out.println(checkMembership(fullList, getInput(null)));
+//       printRecord();
     }
 
     public static void main(String[] args) {
