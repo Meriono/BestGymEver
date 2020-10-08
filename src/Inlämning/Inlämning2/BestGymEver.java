@@ -15,6 +15,8 @@ import java.util.Scanner;
 public class BestGymEver {
 
     String members = "customers.txt";
+    public Boolean test = false;
+    private Scanner sc;
 
     public List<String> getListFromFile(String members){
         List<String> fullList = new ArrayList<>();
@@ -54,9 +56,15 @@ public class BestGymEver {
         return "Inget medlemskap hittades";
     }
 
-    public String getInput(){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Skriv in ett namn eller personnummer");
+    public String getInput(String inputForTesting){
+        if(test){
+            sc = new Scanner(inputForTesting);
+        }
+        else{
+            sc = new Scanner(System.in);
+            System.out.println("Skriv in ett namn eller personnummer");
+        }
+
 
         while (true){
             String input = sc.nextLine();
@@ -70,8 +78,8 @@ public class BestGymEver {
     }
 
     public BestGymEver(){
-//        List<String> fullList = getListFromFile(members);
-//        System.out.println(checkMembership(fullList, getInput()));
+        List<String> fullList = getListFromFile(members);
+       // System.out.println(checkMembership(fullList, getInput(null)));
     }
 
     public static void main(String[] args) {

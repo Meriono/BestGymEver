@@ -30,7 +30,12 @@ class BestGymEverTest {
     }
 
     @Test
-    void getInput(){
-        bge.getInput();
+    void getInputTest(){
+        bge.test = true;
+
+        String ok = "Hanna";
+
+        assertFalse(bge.getInput(ok).isBlank());
+        assertTrue(bge.getInput(ok).equals("Hanna"));
     }
 }
