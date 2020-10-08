@@ -1,6 +1,8 @@
 package Inlämning.Inlämning2;
 
 import java.io.File;
+import java.nio.file.LinkOption;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -32,8 +34,23 @@ public class BestGymEver {
 
     public void printMember(List<String> fullList, String input){
         for (String s: fullList) {
-            if(s.contains(input))
+            if(s.contains(input)){
                 System.out.println("MEDLEM");
+                int placeInList = fullList.indexOf(s)+1;
+                System.out.println("Finns på rad: " + placeInList);
+                System.out.println("Medlem sedan: " + fullList.get(placeInList));
+                System.out.println(LocalDate.parse(fullList.get(placeInList)));
+                LocalDate gammal = LocalDate.parse(fullList.get(placeInList));
+
+                System.out.println(gammal.plusDays(365));
+                int counter = gammal.plusDays(365).compareTo(LocalDate.now());
+                if (counter < 0)
+                    System.out.println("GAMMALT MEDLEMSKAP");
+                else if (counter > 0)
+                    System.out.println("MEDLEM");
+                else
+                    System.out.println("Medlemskapet går ut idag");
+            }
         }
     }
 
