@@ -72,12 +72,15 @@ public class BestGymEver {
         }
     }
 
-    public void printRecord(){
-        List<String> trackRecord = getListFromFile("record.txt");
+    public List<String> getRecord(){
+        List<String> trackRecord = getListFromFile(members);
+        return trackRecord;
+    }
+
+    public void printRecord(List<String> trackRecord){
         for (String s: trackRecord) {
             System.out.println(s);
         }
-
     }
 
     public String getInput(String inputForTesting){

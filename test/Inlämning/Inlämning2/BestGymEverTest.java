@@ -45,6 +45,6 @@ class BestGymEverTest {
         fullList.add("Bertil");
         fullList.add("Cesar");
         bge.setRecord(fullList.get(1));
-        bge.printRecord();
+        assertTrue(fullList.toString().contains("rtil"));
     }
 }
