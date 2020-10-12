@@ -19,7 +19,6 @@ public class BestGymEver {
     Path inMembers = Paths.get("src\\Inlämning\\Inlämning2\\customers.txt");
     Path outRecord = Paths.get("src\\Inlämning\\Inlämning2\\record.txt");
     public Boolean test = false;
-    private Scanner sc;
 
     public List<String> getListFromFile(Path inMembers){
         List<String> fullList = new ArrayList<>();
@@ -73,6 +72,7 @@ public class BestGymEver {
     }
 
     public String getInput(String inputForTesting){
+        Scanner sc;
         if(test){
             sc = new Scanner(inputForTesting);
         }
@@ -92,12 +92,12 @@ public class BestGymEver {
         }
     }
 
-    public BestGymEver(){
-        List<String> fullList = getListFromFile(inMembers);
-        System.out.println(checkMembership(fullList, getInput(null)));
-    }
-
-    public static void main(String[] args) {
-        BestGymEver start = new BestGymEver();
-    }
+//    public BestGymEver(){
+//        List<String> fullList = getListFromFile(inMembers);
+//        System.out.println(checkMembership(fullList, getInput(null)));
+//    }
+//
+//    public static void main(String[] args) {
+//        BestGymEver start = new BestGymEver();
+//    }
 }
