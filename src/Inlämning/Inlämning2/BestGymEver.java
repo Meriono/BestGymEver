@@ -92,12 +92,12 @@ public class BestGymEver {
         }
     }
 
-//    public BestGymEver(){
-//        List<String> fullList = getListFromFile(inMembers);
-//        System.out.println(checkMembership(fullList, getInput(null)));
-//    }
-//
-//    public static void main(String[] args) {
-//        BestGymEver start = new BestGymEver();
-//    }
+    public BestGymEver(){
+        List<String> fullList = getListFromFile(inMembers);
+        System.out.println(checkMembership(fullList, getInput(null)));
+    }
+
+    public static void main(String[] args) {
+        BestGymEver start = new BestGymEver();
+    }
 }
