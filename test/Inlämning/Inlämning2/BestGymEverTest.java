@@ -43,12 +43,6 @@ class BestGymEverTest {
         return trackRecord;
     }
 
-//    public void printRecord(List<String> trackRecord){
-//        for (String s: trackRecord) {
-//            System.out.println(s);
-//        }
-//    }
-
     @Test
     void setRecordTest(){
         fullList.add("Adam");
