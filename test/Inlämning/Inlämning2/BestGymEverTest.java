@@ -38,12 +38,24 @@ class BestGymEverTest {
         assertTrue(bge.getInput(ok).equals("Hanna"));
     }
 
+    public List<String> getRecord(){
+        List<String> trackRecord = bge.getListFromFile(bge.outRecord);
+        return trackRecord;
+    }
+
+//    public void printRecord(List<String> trackRecord){
+//        for (String s: trackRecord) {
+//            System.out.println(s);
+//        }
+//    }
+
     @Test
-    void recordTest(){
+    void setRecordTest(){
         fullList.add("Adam");
         fullList.add("Bertil");
         fullList.add("Cesar");
         bge.setRecord(fullList.get(1));
-        assertTrue(fullList.toString().contains("rtil"));
+        assertTrue(getRecord().contains("Bertil"));
+        assertFalse((getRecord().contains("Adam")));
     }
 }
