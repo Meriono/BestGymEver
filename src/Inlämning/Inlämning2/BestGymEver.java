@@ -1,6 +1,8 @@
 package Inlämning.Inlämning2;
 
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,14 +16,14 @@ import java.util.Scanner;
  */
 public class BestGymEver {
 
-    String members = "customers.txt";
+    Path inMembers = Paths.get("src\\Inlämning\\Inlämning2\\customers.txt");
+    Path outRecord = Paths.get("src\\Inlämning\\Inlämning2\\record.txt");
     public Boolean test = false;
     private Scanner sc;
 
-    public List<String> getListFromFile(String members){
+    public List<String> getListFromFile(Path inMembers){
         List<String> fullList = new ArrayList<>();
-        try {
-            Scanner sc = new Scanner(new File(members));
+        try (Scanner sc = new Scanner(new File(inMembers.toString()))){
             while(sc.hasNextLine()){
                 fullList.add(sc.nextLine());
             }
@@ -62,24 +64,11 @@ public class BestGymEver {
     }
 
     public void setRecord(String member) {
-        try{
-            PrintWriter ut = new PrintWriter(new BufferedWriter(new FileWriter("record.txt", true)));
+        try(PrintWriter ut = new PrintWriter(new BufferedWriter(new FileWriter(outRecord.toString(), true)))){
             ut.println(member);
             ut.println(LocalDate.now());
-            ut.close();
         }catch (IOException e){
             e.printStackTrace();
-        }
-    }
-
-    public List<String> getRecord(){
-        List<String> trackRecord = getListFromFile("record.txt");
-        return trackRecord;
-    }
-
-    public void printRecord(List<String> trackRecord){
-        for (String s: trackRecord) {
-            System.out.println(s);
         }
     }
 
@@ -104,9 +93,8 @@ public class BestGymEver {
     }
 
     public BestGymEver(){
-        List<String> fullList = getListFromFile(members);
-       System.out.println(checkMembership(fullList, getInput(null)));
-       printRecord(getRecord());
+        List<String> fullList = getListFromFile(inMembers);
+        System.out.println(checkMembership(fullList, getInput(null)));
     }
 
     public static void main(String[] args) {
