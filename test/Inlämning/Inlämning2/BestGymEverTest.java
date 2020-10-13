@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Project: Sprint2
  */
 class BestGymEverTest {
-    BestGymEver bge = new BestGymEver();
+    BestGymEver bge = new BestGymEver(true);
     List<String> fullList = new ArrayList<>();
     LocalDate date = LocalDate.of(2020,10,30);
 
@@ -33,9 +33,9 @@ class BestGymEverTest {
 
     @Test
     void checkMembershipTest(){
-        fullList.add("Sara");
+        fullList.add("9805101234, Sara Ettefternamn");
         fullList.add("2018-12-02");
-        fullList.add("Hanna");
+        fullList.add("9612311234, Hanna Edlund");
         fullList.add("2020-01-01");
 
         assertTrue(bge.checkMembership(fullList, "Hanna", date).equals("Kunden är aktivt medlem"));
@@ -57,13 +57,22 @@ class BestGymEverTest {
         return trackRecord;
     }
 
+    boolean doesRecordContain(String input){
+        for (String s: getRecord()) {
+            if(s.toLowerCase().contains(input.toLowerCase()))
+                return true;
+        }
+        return false;
+    }
+
     @Test
     void setRecordTest(){
         fullList.add("Adam");
-        fullList.add("Bertil");
+        fullList.add("8808080000, Bertil Bertilsson");
         fullList.add("Cesar");
         bge.setRecord(fullList.get(1), date);
-        assertTrue(getRecord().contains("Bertil"));
-        assertFalse((getRecord().contains("Adam")));
+
+        assertTrue(doesRecordContain("Bertil"));
+        assertFalse(doesRecordContain("Adam"));
     }
 }

@@ -40,7 +40,7 @@ public class BestGymEver {
 
     public String checkMembership(List<String> completeList, String input, LocalDate date){
         for (String s: completeList) {
-            if(s.contains(input)){
+            if(s.toLowerCase().contains(input.toLowerCase())){
                 //placeInList beräknar ut vilken rad kunden står på
                 int placeInList = completeList.indexOf(s)+1;
 
@@ -96,12 +96,16 @@ public class BestGymEver {
         }
     }
 
-    public BestGymEver(){
-        List<String> fullList = getListFromFile(inMembers);
-        System.out.println(checkMembership(fullList, getInput(null), LocalDate.now()));
+    public BestGymEver(boolean test){
+        this.test = test;
+
+        if (!this.test) {
+            List<String> fullList = getListFromFile(inMembers);
+            System.out.println(checkMembership(fullList, getInput(null), LocalDate.now()));
+        }
     }
 
     public static void main(String[] args) {
-        BestGymEver start = new BestGymEver();
+        BestGymEver start = new BestGymEver(false);
     }
 }
