@@ -20,12 +20,16 @@ public class BestGymEver {
     Path outRecord = Paths.get("src\\Inlämning\\Inlämning2\\record.txt");
     public Boolean test = false;
 
-    public List<String> getListFromFile(Path inMembers){
+    public List<String> getListFromFile(Path inPath){
         List<String> fullList = new ArrayList<>();
-        try (Scanner sc = new Scanner(new File(inMembers.toString()))){
+        try (Scanner sc = new Scanner(new File(inPath.toString()))){
             while(sc.hasNextLine()){
                 fullList.add(sc.nextLine());
             }
+        }
+        catch (FileNotFoundException e){
+            System.out.println("Filen går inte att hitta");
+            System.exit(0);
         }
         catch (Exception e){
             e.printStackTrace();
@@ -46,7 +50,7 @@ public class BestGymEver {
                 //dateofMembership gör om String datumet till en LocalDate
                 LocalDate dateOfMembership = LocalDate.parse(fullList.get(placeInList));
 
-                //counter jämför om dateOfMembership + 365 dagar är innan, efter eller idag och skriver ut status på medlemskapet
+                //counter jämför om dateOfMembership + 365 dagar är innan, efter eller det valda datumet och skriver ut status på medlemskapet
                 int counter = dateOfMembership.plusDays(365).compareTo(date);
 
                 if (counter < 0)
