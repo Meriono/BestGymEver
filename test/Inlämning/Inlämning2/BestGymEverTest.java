@@ -2,6 +2,8 @@ package Inlämning.Inlämning2;
 
 import org.junit.jupiter.api.Test;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,16 @@ class BestGymEverTest {
     BestGymEver bge = new BestGymEver();
     List<String> fullList = new ArrayList<>();
     LocalDate date = LocalDate.of(2020,10,30);
+
+    @Test
+    void getListFromFileTest(){
+        Path pathForTesting = Paths.get("test\\Inlämning\\Inlämning2\\inputFileTesting");
+        List<String> listForTesting = bge.getListFromFile(pathForTesting);
+
+        assertTrue(listForTesting.size() == 6);
+        assertTrue(listForTesting.get(0).endsWith("Aromes"));
+        assertTrue(listForTesting.get(5).endsWith("03-12"));
+    }
 
     @Test
     void checkMembershipTest(){
