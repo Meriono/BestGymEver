@@ -21,10 +21,10 @@ public class BestGymEver {
     public Boolean test = false;
 
     public List<String> getListFromFile(Path inPath){
-        List<String> fullList = new ArrayList<>();
+        List<String> completeList = new ArrayList<>();
         try (Scanner sc = new Scanner(new File(inPath.toString()))){
             while(sc.hasNextLine()){
-                fullList.add(sc.nextLine());
+                completeList.add(sc.nextLine());
             }
         }
         catch (FileNotFoundException e){
@@ -35,20 +35,20 @@ public class BestGymEver {
             e.printStackTrace();
             System.exit(0);
         }
-        return fullList;
+        return completeList;
     }
 
-    public String checkMembership(List<String> fullList, String input, LocalDate date){
-        for (String s: fullList) {
+    public String checkMembership(List<String> completeList, String input, LocalDate date){
+        for (String s: completeList) {
             if(s.contains(input)){
                 //placeInList beräknar ut vilken rad kunden står på
-                int placeInList = fullList.indexOf(s)+1;
+                int placeInList = completeList.indexOf(s)+1;
 
                 //String som innehåller all kundens information, personnummer + namn
-                String fullMembersInfo = fullList.get(fullList.indexOf(s));
+                String fullMembersInfo = completeList.get(completeList.indexOf(s));
 
                 //dateofMembership gör om String datumet till en LocalDate
-                LocalDate dateOfMembership = LocalDate.parse(fullList.get(placeInList));
+                LocalDate dateOfMembership = LocalDate.parse(completeList.get(placeInList));
 
                 //counter jämför om dateOfMembership + 365 dagar är innan, efter eller det valda datumet och skriver ut status på medlemskapet
                 int counter = dateOfMembership.plusDays(365).compareTo(date);
