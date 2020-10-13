@@ -34,7 +34,7 @@ public class BestGymEver {
         return fullList;
     }
 
-    public String checkMembership(List<String> fullList, String input){
+    public String checkMembership(List<String> fullList, String input, LocalDate date){
         for (String s: fullList) {
             if(s.contains(input)){
                 //placeInList beräknar ut vilken rad kunden står på
@@ -47,12 +47,12 @@ public class BestGymEver {
                 LocalDate dateOfMembership = LocalDate.parse(fullList.get(placeInList));
 
                 //counter jämför om dateOfMembership + 365 dagar är innan, efter eller idag och skriver ut status på medlemskapet
-                int counter = dateOfMembership.plusDays(365).compareTo(LocalDate.now());
+                int counter = dateOfMembership.plusDays(365).compareTo(date);
 
                 if (counter < 0)
                     return "Kunden har ett oaktivt medlemskap";
                 else if (counter > 0){
-                    setRecord(fullMembersInfo);
+                    setRecord(fullMembersInfo, date);
                     return "Kunden är aktivt medlem";
                 }
                 else
@@ -62,10 +62,10 @@ public class BestGymEver {
         return "Inget medlemskap hittades";
     }
 
-    public void setRecord(String member) {
+    public void setRecord(String member, LocalDate date) {
         try(PrintWriter ut = new PrintWriter(new BufferedWriter(new FileWriter(outRecord.toString(), true)))){
             ut.println(member);
-            ut.println(LocalDate.now());
+            ut.println(date);
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -94,7 +94,7 @@ public class BestGymEver {
 
     public BestGymEver(){
         List<String> fullList = getListFromFile(inMembers);
-        System.out.println(checkMembership(fullList, getInput(null)));
+        System.out.println(checkMembership(fullList, getInput(null), LocalDate.now()));
     }
 
     public static void main(String[] args) {

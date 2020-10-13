@@ -2,6 +2,7 @@ package Inlämning.Inlämning2;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class BestGymEverTest {
     BestGymEver bge = new BestGymEver();
     List<String> fullList = new ArrayList<>();
+    LocalDate date = LocalDate.of(2020,10,30);
 
     @Test
     void checkMembershipTest(){
@@ -24,9 +26,10 @@ class BestGymEverTest {
         fullList.add("Hanna");
         fullList.add("2020-01-01");
 
-        assertTrue(bge.checkMembership(fullList, "Hanna").equals("Kunden är aktivt medlem"));
-        assertFalse(bge.checkMembership(fullList, "Pelle").equals("Kunden är aktivt medlem"));
-        assertTrue(bge.checkMembership(fullList, "Sara").endsWith("oaktivt medlemskap"));
+
+        assertTrue(bge.checkMembership(fullList, "Hanna", date).equals("Kunden är aktivt medlem"));
+        assertFalse(bge.checkMembership(fullList, "Pelle", date).equals("Kunden är aktivt medlem"));
+        assertTrue(bge.checkMembership(fullList, "Sara", date).endsWith("oaktivt medlemskap"));
     }
 
     @Test
@@ -48,7 +51,7 @@ class BestGymEverTest {
         fullList.add("Adam");
         fullList.add("Bertil");
         fullList.add("Cesar");
-        bge.setRecord(fullList.get(1));
+        bge.setRecord(fullList.get(1), date);
         assertTrue(getRecord().contains("Bertil"));
         assertFalse((getRecord().contains("Adam")));
     }
