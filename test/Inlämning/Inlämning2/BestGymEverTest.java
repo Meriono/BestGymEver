@@ -38,7 +38,6 @@ class BestGymEverTest {
         fullList.add("Hanna");
         fullList.add("2020-01-01");
 
-
         assertTrue(bge.checkMembership(fullList, "Hanna", date).equals("Kunden är aktivt medlem"));
         assertFalse(bge.checkMembership(fullList, "Pelle", date).equals("Kunden är aktivt medlem"));
         assertTrue(bge.checkMembership(fullList, "Sara", date).endsWith("oaktivt medlemskap"));
