@@ -47,9 +47,9 @@ class BestGymEverTest {
     void getInputTest(){
         bge.test = true;
 
-        String ok = "Hanna";
-        assertFalse(bge.getInput(ok).isBlank());
-        assertTrue(bge.getInput(ok).equals("Hanna"));
+        String testOfInputString = "Hanna";
+        assertFalse(bge.getInput(testOfInputString).isBlank());
+        assertTrue(bge.getInput(testOfInputString).equals("Hanna"));
     }
 
     public List<String> getRecord(){
